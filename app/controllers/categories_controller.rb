@@ -1,9 +1,14 @@
 class CategoriesController < ApplicationController
+  binding.pry
 
-  # def show
-  #   @categories = Category.find_by_name(params:)
-  #   @posts = Post.all
-  #   render text: params[:post].inspect
-  #   #render 'posts/index'
-  # end
+  def new
+  end
+
+  def create
+  end
+
+  def show
+    @category = Category.find(params[:id])
+    @posts = @category.posts
+  end
 end

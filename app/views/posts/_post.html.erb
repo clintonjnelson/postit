@@ -11,14 +11,21 @@
     <h4> <%= link_to post.title, post.url %> </h4>
     <p>  <%= post.description             %> </p>
 
+    <!-- Make A _creator_sig.html.erb -->
     <p>
-      <span class='quiet'> posted by <%= post.creator.username %> </span>
-      <small class='quiet'></small>at  <%= post.created_at    %>
+      <span class='quiet'> posted by
+        <%= (post.creator.nil? ? "Anonymous" : post.creator.username) %>
+      </span>
+      <small class='quiet'> at  <%= post.created_at %> </small>
     </p>
 
     <small>
       <span>
         <%= link_to "#{post.comments.size} comments", post_path(post) %>
+      </span>
+        |
+      <span class='quiet'>
+        <%= link_to 'edit post', edit_post_path(post) %>
       </span>
     </small>
   </div>

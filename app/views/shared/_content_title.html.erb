@@ -1,1 +1,8 @@
-<p class='lead'> <%= title %> <hr/> </p>
+<!-- Requires being passes variables that can have values or be nil.
+     (post = @post || nil) and (title = "" or nil)
+-->
+<p class='lead'>
+  <%= post.nil? ? title : (link_to post.title, post.url) %>
+  <hr/>
+</p>
+

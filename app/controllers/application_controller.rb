@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :load_categories
 
-  def load_categories
-    @categories = Category.all
-  end
+  private
+    def load_categories
+      @categories = Category.all
+    end
 end

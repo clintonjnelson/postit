@@ -1,0 +1,22 @@
+<div class='span7 well'>
+  <%= form_for @post do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.label       :title %>
+    <%= f.text_field  :title %>
+    <%= f.label       :url %>
+    <%= f.text_field  :url %>
+    <%= f.label       :description %>
+    <%= f.text_area   :description %>
+    <br/>
+
+    <% @categories.each do |category| %>
+      <%= category.name %>:
+      <%= check_box_tag :category %>
+    <% end %>
+    <br/>
+    <br/>
+
+    <%= f.submit button_name, class: 'btn btn-primary' %>
+  <% end %>
+</div>

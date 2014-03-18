@@ -1,10 +1,24 @@
-<p>
-  <%= render @post.categories %>
-</p>
+<p> <%= render @post.categories %> </p>
 
-<%= render 'shared/content_title.html.erb', title: @post.title %>
+<%= render 'shared/content_title.html.erb', title: nil, post: @post %>
 
 <p>
   <%= @post.description %>
 </p>
 <hr/>
+
+<h6> Leave Comment </h6>
+<%= form_for [@post, @comment] do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_area   :body %>
+  <br/>
+  <%= f.submit "Submit", class: "btn btn-small" %>
+<% end %>
+<hr/>
+
+<h4>Comments:</h4>
+
+<% unless @post.comments.nil? %>
+  <%= render @post.comments %>
+<% end %>
