@@ -1,24 +1,31 @@
+<p class='pull-right'>
+  [<%= link_to 'edit post', edit_post_path(@post) %>]
+</p>
 <p> <%= render @post.categories %> </p>
 
-<%= render 'shared/content_title.html.erb', title: nil, post: @post %>
+<%= render 'shared/content_title.html.erb', title: @post.title,
+                                            link: @post.url,
+                                            title2: nil %>
 
 <p>
   <%= @post.description %>
 </p>
 <hr/>
 
-<h6> Leave Comment </h6>
-<%= form_for [@post, @comment] do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<div class='row span8'>
+  <h5> Leave Comment </h5>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= render 'shared/form_errors', object: f.object %>
 
-  <%= f.text_area   :body %>
-  <br/>
-  <%= f.submit "Submit", class: "btn btn-small" %>
-<% end %>
-<hr/>
+    <%= f.text_area   :body, rows: 4 %>
+    <br/>
+    <%= f.submit "Submit", class: "btn btn-small btn-primary" %>
+  <% end %>
+</div>
 
-<h4>Comments:</h4>
-
-<% unless @post.comments.nil? %>
-  <%= render @post.comments %>
-<% end %>
+<div class='row span8'>
+  <h4>Comments:</h4>
+  <% unless @post.comments.nil? %>
+    <%= render @post.comments %>
+  <% end %>
+</div>

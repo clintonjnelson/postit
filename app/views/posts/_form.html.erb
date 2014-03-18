@@ -1,18 +1,18 @@
 <div class='span7 well'>
   <%= form_for @post do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'shared/form_errors', object: f.object %>
 
     <%= f.label       :title %>
     <%= f.text_field  :title %>
     <%= f.label       :url %>
     <%= f.text_field  :url %>
     <%= f.label       :description %>
-    <%= f.text_area   :description %>
+    <%= f.text_area   :description, rows: 8 %>
     <br/>
 
     <% @categories.each do |category| %>
-      <%= category.name %>:
-      <%= check_box_tag :category %>
+      <%= check_box_tag "category_ids[]", category.id %>
+      <%= category.name %>
     <% end %>
     <br/>
     <br/>

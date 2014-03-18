@@ -1,0 +1,14 @@
+<%= render 'shared/content_title',  title: 'Create A New Category',
+                                    link: nil,
+                                    title2: nil %>
+
+<div class='row span8 well' >
+  <%= form_for @category do |f| %>
+    <%= render 'shared/form_errors', object: f.object %>
+
+    <%= f.label       'New Category:' %>
+    <%= f.text_field  :name           %>
+
+    <%= f.submit "Create", class: 'btn btn-primary' %>
+  <% end %>
+</div>

@@ -19,6 +19,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    set_relationals
     binding.pry
     if @post.save
       flash[:success] = "Your post was created"
@@ -41,21 +42,24 @@ class PostsController < ApplicationController
     end
   end
 
-  ###################### POST CONTROLLER METHODS (PUBLIC) ######################
-
-
-
   ###################### POST CONTROLLER METHODS (PRIVATE) #####################
   private
     def post_params   # could have a category_params too if needed
       params.require(:post).permit(:title, :url, :description)
     end
 
+    def set_categories
+      @categories = Category.all
+    end
+
     def set_post
       @post = Post.find(params[:id])
     end
 
-    def set_categories
-      @categories = Category.all
+    def set_relationals
+      @post.creator = User.first      #HARD CODE THIS UNTIL AUTHENTICATION
+      params[:category_ids].each do |id_num|
+        @post.categories << Category.find(id_num)
+      end
     end
 end

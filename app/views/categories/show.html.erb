@@ -1,1 +1,5 @@
-<h1> I made it! </h1>
+<%= render 'shared/content_title',  title: "All Posts",
+                                    link: root_path,
+                                    title2: @category.name %>
+
+<%= render @category.posts %>
