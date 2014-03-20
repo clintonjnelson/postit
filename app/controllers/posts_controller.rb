@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post,        only: [:show, :edit, :update]
-  before_action :set_categories,  only: [:edit, :new]
+  before_action :set_post,            only: [:show, :edit, :update]
+  before_action :set_categories,      only: [:edit, :new]
+
+  before_action :require_logged_in,     only: [:new, :create]
+  before_action :require_correct_user,  only: [:edit, :update]
 
   ########################## DISPLAYING EXISTING POSTS #########################
   def index
@@ -19,8 +22,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    set_relationals
-    binding.pry
+    @post.creator = current_user
     if @post.save
       flash[:success] = "Your post was created"
       redirect_to posts_path
@@ -44,8 +46,15 @@ class PostsController < ApplicationController
 
   ###################### POST CONTROLLER METHODS (PRIVATE) #####################
   private
+    def require_correct_user
+      if !current_user?(@post.creator)
+        flash[:error] = 'You must be the creator of this post to do that.'
+        redirect_to root_path
+      end
+    end
+
     def post_params   # could have a category_params too if needed
-      params.require(:post).permit(:title, :url, :description)
+      params.require(:post).permit(:title, :url, :description, category_ids: [])
     end
 
     def set_categories
@@ -54,12 +63,5 @@ class PostsController < ApplicationController
 
     def set_post
       @post = Post.find(params[:id])
-    end
-
-    def set_relationals
-      @post.creator = User.first      #HARD CODE THIS UNTIL AUTHENTICATION
-      params[:category_ids].each do |id_num|
-        @post.categories << Category.find(id_num)
-      end
     end
 end

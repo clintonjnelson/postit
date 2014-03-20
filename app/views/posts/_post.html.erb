@@ -8,25 +8,29 @@
     <p>
       <%= render post.categories %>
     </p>
-    <h4> <%= link_to post.title, post.url %> </h4>
+    <h4> <%= link_to post.title, format_url(post.url) %> </h4>
     <p>  <%= post.description             %> </p>
 
-    <!-- Make A _creator_sig.html.erb -->
+    <!-- Make A _creator_sig.html.erb
+         FIX THE ANONYMOUS TEMP SOLUTION ONCE DB IS RESET
+      -->
     <p>
       <span class='quiet'> posted by
         <%= (post.creator.nil? ? "Anonymous" : post.creator.username) %>
       </span>
-      <small class='quiet'> at  <%= post.created_at %> </small>
+      <small class='quiet'> on <%= format_datetime(post.created_at) %> </small>
     </p>
 
     <small>
       <span>
         <%= link_to "#{post.comments.size} comments", post_path(post) %>
       </span>
-        |
-      <span class='quiet'>
-        <%= link_to 'edit post', edit_post_path(post) %>
-      </span>
+      <% if current_user?(post.creator) %>
+          |
+        <span class='quiet'>
+          <%= link_to 'edit post', edit_post_path(post) %>
+        </span>
+      <% end %>
     </small>
   </div>
 </div>

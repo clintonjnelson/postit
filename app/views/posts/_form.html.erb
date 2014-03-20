@@ -7,12 +7,11 @@
     <%= f.label       :url %>
     <%= f.text_field  :url %>
     <%= f.label       :description %>
-    <%= f.text_area   :description, rows: 8 %>
+    <%= f.text_area   :description, rows: 8, class: 'span5' %>
     <br/>
 
-    <% @categories.each do |category| %>
-      <%= check_box_tag "category_ids[]", category.id %>
-      <%= category.name %>
+    <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |ckbx|%>
+      <%= ckbx.label(class: 'checkbox inline') {ckbx.check_box(class: 'checkbox') + ckbx.text } %>
     <% end %>
     <br/>
     <br/>

@@ -1,11 +1,18 @@
+<% link ||= false %>
+
 <div class='row'>
-  <div class='span8 well'>
-    <p> <%= comment.body %> </p>
+  <div class='span1 well'> Ajax Votes </div>
+  <div class='span6 well'>
+    <p> "<%= comment.body %>"
+      <% if link %>
+        <span> on <%= link_to comment.post.title, post_path(comment.post) %> </span>
+      <% end %>
+    </p>
     <p>
       <span class='quiet'>
-        by <%= (comment.creator.nil? ? "Anonymous" : comment.creator) %>
+        by <%= comment.creator.username %>
       </span>
-      <small> at <%= comment.created_at %> </small>
+      <small> on <%= format_datetime(comment.created_at) %> </small>
     </p>
   </div>
 </div>

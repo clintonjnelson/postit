@@ -1,10 +1,13 @@
-<p class='pull-right'>
-  [<%= link_to 'edit post', edit_post_path(@post) %>]
-</p>
+<% if current_user?(@post.creator) %>
+  <p class='pull-right'>
+    [<%= link_to 'edit post', edit_post_path(@post) %>]
+  </p>
+<% end %>
+
 <p> <%= render @post.categories %> </p>
 
 <%= render 'shared/content_title.html.erb', title: @post.title,
-                                            link: @post.url,
+                                            link: format_url(@post.url),
                                             title2: nil %>
 
 <p>
@@ -12,20 +15,23 @@
 </p>
 <hr/>
 
-<div class='row span8'>
-  <h5> Leave Comment </h5>
-  <%= form_for [@post, @comment] do |f| %>
-    <%= render 'shared/form_errors', object: f.object %>
+<% if logged_in? %>
+  <div class='row span8'>
+    <h5> Leave Comment </h5>
+    <%= form_for [@post, @comment] do |f| %>
+      <%= render 'shared/form_errors', object: f.object %>
 
-    <%= f.text_area   :body, rows: 4 %>
-    <br/>
-    <%= f.submit "Submit", class: "btn btn-small btn-primary" %>
-  <% end %>
-</div>
+      <%= f.text_area   :body, rows: 4, class: 'span4' %>
+      <br/>
+      <%= f.submit "Submit", class: "btn btn-small btn-primary" %>
+      <span class='quiet'><b class='countdown'> </b></span>
+    <% end %>
+  </div>
+<% end %>
 
 <div class='row span8'>
-  <h4>Comments:</h4>
-  <% unless @post.comments.nil? %>
+  <% if !Post.find(@post).comments.empty? %>
+    <h4>Comments:</h4>
     <%= render @post.comments %>
   <% end %>
 </div>

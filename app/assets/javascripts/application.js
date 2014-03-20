@@ -17,4 +17,26 @@
 //= require_tree .
 //= require bootstrap
 
+///////////////////////////////// FUNCTIONS ////////////////////////////////////
+function updateCountdown() {
+  var maxChars = 300;
+  // 'comment_body' is the id of the css textfield we're using
+  var remainingChars = maxChars - jQuery('#comment_body').val().length;
 
+  // Text for feedback
+  if( remainingChars >= 0 ) { var charsFeedback = ' characters remaining.' }
+  else{ var charsFeedback = ' characters too many.' }
+
+  // Return the text output of the chars concatenated with the string
+  // .countdown is the CSS label it will fall under for incorporation
+  jQuery('.countdown').text(Math.abs(remainingChars) + charsFeedback);
+}
+
+///////////////////////////////// LISTENERS ////////////////////////////////////
+
+  // On ready, load the countdown & update it per additional listeners
+  // Using .on('_listenerName_', function(_functionName_) {}) if current best-practice
+  jQuery(document).ready(function($) {
+    updateCountdown();
+    $('#comment_body').on('change keyup input', updateCountdown);
+  });

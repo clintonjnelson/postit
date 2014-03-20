@@ -1,0 +1,16 @@
+<div class='row span8 well'>
+  <%= form_for @user do |f| %>
+    <%= render 'shared/form_errors', object: f.object %>
+
+    <%= f.label         :username   %>
+    <%= f.text_field    :username   %>
+    <%= f.label         :email      %>
+    <%= f.text_field    :email      %>
+    <%= f.label           (@user.new_record? ? :password : "Change Password") %>
+    <%= f.password_field  :password   %>
+
+    <br/>
+    <%= f.submit (@user.new_record? ? "Create User" : "Update"),
+        class: "btn btn-primary" %>
+  <% end %>
+</div>

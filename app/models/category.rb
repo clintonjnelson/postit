@@ -5,7 +5,7 @@ class Category < ActiveRecord::Base
   before_save :capitalize_name
 
   validates :name, presence: true,
-                   length: { minimum: 1, maximum: 16 },
+                   length: { minimum: 2, maximum: 20 },
                    uniqueness: true
 
   private

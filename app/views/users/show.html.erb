@@ -1,0 +1,51 @@
+<%= render 'shared/content_title', title: "Profile: #{@user.username}" %>
+
+<div class='row'>
+  <div class='span1'></div>
+  <div class='span10 well'>
+    <div class='span2 text-right' >
+      <p> <strong>Username:</strong>         </p>
+      <p> <strong>Email:</strong>            </p>
+      <p> <strong>Timezone:</strong>         </p>
+      <p> <strong>Two-Factor Auth:</strong>  </p>
+      <p> <strong>Phone:</strong>            </p>
+    </div>
+    <div class='span6' >
+      <p> <%= @user.username                                 %> </p>
+      <p> <%= @user.email                                    %> </p>
+
+    </div>
+  </div>
+  <div class='span1'></div>
+</div>
+<br/>
+<h5> <%= @user.username.capitalize %>'s Activity </h5>
+
+<!-- ALTHOUGH I REALLY SHOULD LEARN JS, I LOVE BOOTSTRAP FOR THIS -->
+<ul class='nav nav-tabs' id="userTabs">
+  <li class='<%= params[:tab].nil? ? 'active' : '' %>'>
+    <%= link_to "posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+  <li class='<%= !params[:tab].nil? ? 'active' : '' %>' >
+    <%= link_to "comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
+
+<ul class='tab-content'>
+  <% if params[:tab].nil? %>
+    <div class='tab-pane <%= 'active' if params[:tab].nil? %>' id='my_posts'>
+      <%= render @user.posts %>
+  </div>
+  <% end %>
+  <% if !params[:tab].nil? %>
+    <div class='tab-pane <%= 'active' if !params[:tab].nil? %>' id='my_comments'>
+      <%= render @user.comments, link: true %>
+    </div>
+  <% end %>
+</ul>
+
+
+
+
+
+
