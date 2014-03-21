@@ -5,12 +5,12 @@ class Comment < ActiveRecord::Base
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :post
 
-  #validates :user_id, presence: true
+  validates :user_id, presence: true
   validates :post_id, presence: true
   validates :body,    presence: true,
                       length:   { maximum: 300 }
 
-  #NEED TO DRY THIS OUT --- IT'S IN COMMENTS TOO
+    #NEED TO DRY THIS OUT --- IT'S IN COMMENTS & APPLICATION HELPER, TOO
   def upvotes_count
     self.votes.where(vote: true).count
   end

@@ -27,5 +27,4 @@ class SessionsController < ApplicationController
 
   ############################## HELPER METHODS ################################
   private
-
 end

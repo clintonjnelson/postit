@@ -7,6 +7,7 @@ module ApplicationHelper
     self.votes.where(vote: false).count
   end
 
+  # Needed here for sorting.
   def net_votes
     self.upvotes_count - self.downvotes_count
   end

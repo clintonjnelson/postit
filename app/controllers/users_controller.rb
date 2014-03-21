@@ -30,10 +30,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # need a before filter method that makes sure user is signed in.
-    # need a before filter that makes sure the current user is also the @user.
-      #Add in controller: @user[:password_confirmation] = params[:user][:password_confirmation]
-      #Also add in controller: @user[:password] = params[:user][:password]
     if @user.update(user_params)
       flash[:success] = "Profile Updated"
       redirect_to user_path(@user)

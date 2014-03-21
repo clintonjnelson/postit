@@ -11,10 +11,10 @@ class Post < ActiveRecord::Base
                           length: { minimum: 2, maximum: 500}
   validates :title,       presence: true,
                           length: { minimum: 2, maximum: 140 }
-  #validates :creator, presence: true   #HOW DO I SPECIFY THIS ONE USING CREATOR?
+  validates :user_id,     presence: true   #HOW DO I SPECIFY THIS ONE USING CREATOR?
   #validates :categories    #HOW DO I VALIDATE THROUGH A JOIN TABLE? Need to verify cats.
 
-  #NEED TO DRY THIS OUT --- IT'S IN COMMENTS TOO
+  #NEED TO DRY THIS OUT --- IT'S IN COMMENTS & APPLICATION HELPER, TOO
   def upvotes_count
     self.votes.where(vote: true).count
   end
