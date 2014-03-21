@@ -12,11 +12,11 @@ class Comment < ActiveRecord::Base
 
     #NEED TO DRY THIS OUT --- IT'S IN COMMENTS & APPLICATION HELPER, TOO
   def upvotes_count
-    self.votes.where(vote: true).count
+    self.votes.where(vote: true).size
   end
 
   def downvotes_count
-    self.votes.where(vote: false).count
+    self.votes.where(vote: false).size
   end
 
   def net_votes

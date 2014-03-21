@@ -29,7 +29,7 @@ function updateCountdown() {
 
   // Return the text output of the chars concatenated with the string
   // .countdown is the CSS label it will fall under for incorporation
-  jQuery('.countdown').text(Math.abs(remainingChars) + charsFeedback);
+  jQuery('#countdown').text(Math.abs(remainingChars) + charsFeedback);
 }
 
 ///////////////////////////////// LISTENERS ////////////////////////////////////
