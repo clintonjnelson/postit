@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     def login(user)
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.username}!"
-      redirect_to root_path
+      redirect_to user_path(user)
     end
 
     def logged_in?

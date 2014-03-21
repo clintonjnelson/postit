@@ -8,9 +8,15 @@
     <%= f.text_field    :email      %>
     <%= f.label           (@user.new_record? ? :password : "Change Password") %>
     <%= f.password_field  :password   %>
+    <%= f.label           "Verify Password" %>
+    <%= f.password_field  :password_confirmation %>
+
 
     <br/>
     <%= f.submit (@user.new_record? ? "Create User" : "Update"),
         class: "btn btn-primary" %>
+  <% end %>
+  <% if logged_in? %>
+    <p class='quiet'> Note: password & verification are only required if you're changing the password.</p>
   <% end %>
 </div>

@@ -1,4 +1,15 @@
 module ApplicationHelper
+  def upvotes_count
+    self.votes.where(vote: true).count
+  end
+
+  def downvotes_count
+    self.votes.where(vote: false).count
+  end
+
+  def net_votes
+    self.upvotes_count - self.downvotes_count
+  end
 
   def format_url(url_string)
     url_string.starts_with?("http://") ? url_string : "http://#{url_string}"

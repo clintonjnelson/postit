@@ -8,9 +8,16 @@ PostitTemplate::Application.routes.draw do
   get  '/logout',   to: 'sessions#destroy'  # we can use a get here, because no need to delete anything
 
   # Resources
-  resources   :categories, only:  [:new, :create, :show]
-  resources   :posts,     except: [:destroy] do
-    resources :comments,  only:   [:create, :index]
+  resources     :users,       except: [:index, :destroy]
+  resources     :categories,    only:  [:new, :create, :show]
+  resources     :posts,       except: [:destroy] do
+    member do
+      post      :vote   #/posts/id/vote
+    end
+    resources   :comments,      only:   [:create, :index] do #/posts/id/comments/id
+      member do
+        post :vote   #/posts/id/comments/id/vote
+      end
+    end
   end
-  resources   :users, except: [:index, :destroy]
 end

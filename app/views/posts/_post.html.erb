@@ -1,8 +1,18 @@
 <div class='row'>
-  <div class='span1 well'>
-    <p>
-      (Ajax)Votes
-    </p>
+  <div class='span1 well text-center'>
+    <% if logged_in? %>
+      <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+        <span class='icon-chevron-up'></span>
+      <% end %>
+    <% end %>
+    <br/>
+    <span> <%= pluralize(post.net_votes,'vote') %> </span>
+    <br/>
+    <% if logged_in? %>
+      <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+        <span class='icon-chevron-down'></span>
+      <% end %>
+    <% end %>
   </div>
   <div class='span8 well'>
     <p>

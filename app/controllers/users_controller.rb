@@ -13,8 +13,6 @@ class UsersController < ApplicationController
     if @user.save
       login(@user) #log the user in
       flash[:success] = "Welcome to Postit!"
-      redirect_to user_path(@user)
-      # sign-in user here to cache their remember_token
     else
       render 'new'
     end
@@ -62,10 +60,14 @@ class UsersController < ApplicationController
     end
 
     def require_correct_user
-      current_user == @user
+      unless current_user == @user
+        flash[:error] = "You are not the correct user for that action."
+        redirect_to root_path
+      end
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :password )
+      params.require(:user).permit(:username, :email, :password,
+                                                      :password_confirmation )
     end
 end
