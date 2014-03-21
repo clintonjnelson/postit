@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
 
   private
     def load_categories
-      @categories = Category.all
+      # STILL NEED TO GET THE DROPDOWN LIST SORTED ALPHABETICALLY
+      @categories = Category.all.sort_by(&:name)
     end
 
     # Load current_user via sessions, unless already loaded. Must be logged in.

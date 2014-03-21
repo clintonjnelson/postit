@@ -1,7 +1,8 @@
 <ul class="nav">
   <li> <%= link_to "Postit!", root_path, :class => 'brand' %> </li>
-  <li> <%= link_to 'New Post', new_post_path %> </li>
-
+  <% if logged_in? %>
+    <li> <%= link_to 'New Post', new_post_path %> </li>
+  <% end %>
   <li>
     <div class='btn-group nav_item' id='navcatdropdown'>
       <a class='btn btn-small dropdown-toggle' data-toggle='dropdown' href="#">
