@@ -11,8 +11,9 @@ class UsersController < ApplicationController
     #before_filter to make sure user is not signed_in
     @user = User.new(user_params)
     if @user.save
-      login(@user) #log the user in
       flash[:success] = "Welcome to Postit!"
+      login(@user) #log the user in
+
     else
       render 'new'
     end

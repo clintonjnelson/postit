@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     # Log user in using sessions, flash, redirect.
     def login(user)
       session[:user_id] = user.id
-      flash[:success] = "Welcome, #{user.username}!"
+      flash[:success] ||= "Welcome, #{user.username}!"
       redirect_to user_path(user)
     end
 
