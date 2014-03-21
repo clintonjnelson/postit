@@ -5,7 +5,7 @@
 3. To start the server "rails server".
 4. Navigate your browser to localhost:3000.
 
-http://enigmatic-coast-1733.herokuapp.com/ | git@heroku.com:enigmatic-coast-1733.git
+http://tranquil-gorge-4786.herokuapp.com/ | git@heroku.com:tranquil-gorge-4786.git
 
 == Setting up with Git
 
