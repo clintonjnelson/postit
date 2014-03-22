@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
 
   # HOLD ON VALIDATIONS FOR NOW
   validates :username,  presence:     true,
-                        length:     { minimum: 2, maximum: 30}
+                        length:     { minimum: 2, maximum: 30},
+                        case_sensitive: false,
+                        uniqueness: true
   validates :email,     presence:     true,
                         uniqueness:   true#,
   #                       #add regex to confirm email
