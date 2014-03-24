@@ -21,10 +21,6 @@ class UsersController < ApplicationController
 
   ################################ USER PROFILE ################################
   def show
-    #KEEP THIS CODE HER FOR THE SHOW.HTML.ERB in USERS
-    #<p> <%= !!@user.timezone                                 %> </p>
-    #<p> <%= !!(@user.auth? ? 'ON' : 'OFF')                   %> </p>
-    #<p> <%= !!(@user.phone? ? @user.phone : 'Not Available') %> </p>
   end
 
   def edit
