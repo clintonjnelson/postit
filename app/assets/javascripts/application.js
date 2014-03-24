@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+//= require jquery.turbolinks
 
 ///////////////////////////////// FUNCTIONS ////////////////////////////////////
 function updateCountdown() {
@@ -38,5 +39,9 @@ function updateCountdown() {
   // Using .on('_listenerName_', function(_functionName_) {}) if current best-practice
   jQuery(document).ready(function($) {
     updateCountdown();
-    $('#comment_body').on('change keyup input', updateCountdown);
+    $('body').on('change keyup input', updateCountdown);
   });
+
+
+
+

@@ -1,0 +1,12 @@
+<%= render 'shared/content_title', title: '2-Factor Authentication: Confirm With Text' %>
+
+<div class='row span8 well'>
+  <%= form_tag '/pin', method: 'post' do %>
+    <%= label_tag       :username                     %>
+    <%= text_field_tag  :username                     %>
+    <%= label_tag       "Enter Pin From Text"         %>
+    <%= text_field_tag  :pin                          %>
+    <br/>
+    <%= submit_tag "Login", class: "btn btn-primary" %>
+  <% end %>
+</div>

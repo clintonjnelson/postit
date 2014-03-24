@@ -3,15 +3,17 @@
 <div class='row'>
   <div class='span1 well text-center'>
     <% if logged_in? %>
-      <%= link_to vote_post_comment_path(comment.post, comment, vote: 'true'), method: 'post' do %>
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: 'true'), method: 'post', remote: true do %>
         <span class='icon-chevron-up'></span>
       <% end %>
     <% end %>
     <br/>
-    <span> <%= pluralize(comment.net_votes, 'vote') %> </span>
+    <span id='comment_<%= comment.id %>_votes'>
+      <%= pluralize(comment.net_votes, 'vote') %>
+    </span>
     <br/>
     <% if logged_in? %>
-      <%= link_to vote_post_comment_path(comment.post, comment, vote: 'false'), method: 'post' do %>
+      <%= link_to vote_post_comment_path(comment.post, comment, vote: 'false'), method: 'post', remote: true do %>
         <span class='icon-chevron-down'></span>
       <% end %>
     <% end %>

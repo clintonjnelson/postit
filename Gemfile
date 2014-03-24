@@ -7,11 +7,14 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'pry'
+gem 'votable_clint_march'
+gem 'sluggable_cjn', '0.0.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 

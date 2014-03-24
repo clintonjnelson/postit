@@ -13,7 +13,9 @@
     <div class='span6' >
       <p> <%= @user.username                                 %> </p>
       <p> <%= @user.email                                    %> </p>
-
+      <p> <%= @user.timezone                                 %> </p>
+      <p> <%= @user.phone.empty? ? "OFF" : "(currently disabled for site)"%> </p>
+      <p> <%= @user.phone.empty? ? ""    : @user.phone       %> </p>
     </div>
   </div>
   <div class='span1'></div>

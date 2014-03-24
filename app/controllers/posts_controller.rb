@@ -13,6 +13,12 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    respond_to do |format|
+      format.html
+      format.json { render json: [@post.title, @post.id]  }
+      format.xml  { render  xml: [@post.title, @post.id] }
+      format.js   { render   js: @post.title }
+    end
   end
 
   ############################ MAKING NEW POSTS ################################
@@ -45,19 +51,24 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @vote = Vote.new(votable: @post, creator: current_user, vote: params[:vote])
-    if @vote.save
-      flash[:success] = "Vote counted."
-    else
-      flash[:error] = "You've already voted on this post."
+    @vote = Vote.create(votable: @post, creator: current_user, vote: params[:vote])
+    respond_to do |format|
+      format.html do
+        if @vote.valid?
+          flash[:success] = 'Vote counted.'
+        else
+          flash[:error] = "You've already voted on this post."
+        end
+        redirect_to :back
+      end
+      format.js   #THIS TRIPS OUR VOTE.JS.ERB FILE IN POSTS
     end
-    redirect_to :back
   end
 
   ###################### POST CONTROLLER METHODS (PRIVATE) #####################
   private
     def require_correct_user
-      if !current_user?(@post.creator)
+      unless (current_user?(@post.creator) || admin_user?)
         flash[:error] = 'You must be the creator of this post to do that.'
         redirect_to root_path
       end
@@ -72,6 +83,6 @@ class PostsController < ApplicationController
     end
 
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by(slug: params[:id])
     end
 end

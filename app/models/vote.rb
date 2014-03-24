@@ -3,6 +3,6 @@ class Vote < ActiveRecord::Base
   belongs_to  :votable, polymorphic: true
   belongs_to  :creator, foreign_key: 'user_id', class_name: 'User'
 
-validates :creator, uniqueness: {scope: :votable,
-                                 message: "You can only vote for an item once."}
+validates_uniqueness_of :creator, scope: [:votable_id, :votable_type]
+
 end

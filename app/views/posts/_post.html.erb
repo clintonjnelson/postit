@@ -1,15 +1,17 @@
 <div class='row'>
   <div class='span1 well text-center'>
     <% if logged_in? %>
-      <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+      <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
         <span class='icon-chevron-up'></span>
       <% end %>
     <% end %>
     <br/>
-    <span> <%= pluralize(post.net_votes,'vote') %> </span>
+    <span id='post_<%= post.slug %>_votes'>
+      <%= pluralize(post.net_votes,'vote') %>
+    </span>
     <br/>
     <% if logged_in? %>
-      <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+      <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
         <span class='icon-chevron-down'></span>
       <% end %>
     <% end %>
@@ -35,7 +37,7 @@
       <span>
         <%= link_to "#{pluralize(post.comments.size, 'comment')}", post_path(post) %>
       </span>
-      <% if current_user?(post.creator) %>
+      <% if current_user?(post.creator) || admin_user? %>
           |
         <span class='quiet'>
           <%= link_to 'edit post', edit_post_path(post) %>

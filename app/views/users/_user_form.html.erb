@@ -2,14 +2,21 @@
   <%= form_for @user do |f| %>
     <%= render 'shared/form_errors', object: f.object %>
 
-    <%= f.label         :username   %>
-    <%= f.text_field    :username   %>
-    <%= f.label         :email      %>
-    <%= f.text_field    :email      %>
+    <%= f.label             :username                      %>
+    <%= f.text_field        :username                      %>
+    <%= f.label             :email                         %>
+    <%= f.text_field        :email                         %>
+    <%= f.label             "Select Time Zone (optional)"  %>
+    <%= f.time_zone_select  :timezone,
+                            ActiveSupport::TimeZone.us_zones,
+                            include_blank: true            %>
+    <%= f.label             "Phone Number For Optional 2-Factor Authentication"%>
+    <p class='quiet'>       format: 5555555555           </p>
+    <%= f.text_field        :phone                         %>
     <%= f.label           (@user.new_record? ? :password : "Change Password") %>
-    <%= f.password_field  :password   %>
-    <%= f.label           "Verify Password" %>
-    <%= f.password_field  :password_confirmation %>
+    <%= f.password_field    :password                      %>
+    <%= f.label             "Verify Password"              %>
+    <%= f.password_field    :password_confirmation         %>
 
 
     <br/>

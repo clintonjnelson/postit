@@ -53,18 +53,19 @@ class UsersController < ApplicationController
   ################################ HELPER METHODS ##############################
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(slug: params[:id])
     end
 
     def require_correct_user
-      unless current_user == @user
-        flash[:error] = "You are not the correct user for that action."
-        redirect_to root_path
-      end
+      access_denied("You are not the appropriate user.") unless current_user == @user
     end
 
     def user_params
-      params.require(:user).permit(:username, :email, :password,
-                                                      :password_confirmation )
+      params.require(:user).permit(:username,
+                                   :email,
+                                   :timezone,
+                                   :phone,
+                                   :password,
+                                   :password_confirmation)
     end
 end
